@@ -38,6 +38,10 @@
                         <label>Jurusan</label>
                         <input type="text" class="form-control" name="jurusan" required>
                     </div>
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <input type="file" class="form-control" name="photo" required>
+                    </div>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Simpan</button>
                     <button type="reset" class="btn btn-default"><i class="fa fa-file-text"></i>Bersih</button>
                 </form>

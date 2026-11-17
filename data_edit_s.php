@@ -6,6 +6,7 @@
     $nama = $_POST['nama'];
     $nim = $_POST['nim'];
     $jurusan = $_POST['jurusan'];
+    $photo = $_FILES['photo']['name'];
 
     if($angkatan == "" || $nama == "" || $nim == "" || $jurusan == ""){
         ?>
@@ -14,17 +15,33 @@
             document.location.href="data_edit.php?id=<?echo $id; ?>";
         </script>
     <?php
-    }else{
-        $sql = "UPDATE m_siswa SET angkatan = '$angkatan', nama='$nama', nim='$nim', jurusan='$jurusan' WHERE id='$id'";
-        if($koneksi->query($sql) === false){
-            trigger_error('Perintah SQL salah: '.$sql.' Error: '.$koneksi->error, E_USER_ERROR);
+    }
+    if($photo != ""){
+        $ekstensi_diperbolehkan = array('png', 'jpg');
+        $x = explode('.', $photo);
+        $ekstensi = strtolower(end($x));
+        $file_tmp = $_FILES['photo']['tmp_name'];
+        $angka_acak = rand(1, 999);
+        $nama_gambar_baru = $angka_acak.'_'.$photo;
+        if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+            move_uploaded_file($file_tmp, 'img/'.$nama_gambar_baru);
+            $query = "UPDATE m_siswa SET angkatan = '$angkatan', nama='$nama', nim='$nim', jurusan='$jurusan', photo='$nama_gambar_baru' WHERE id='$id'";
+            $result = mysqli_query($koneksi, $query);
+            if(!$result){
+                die("Query gagal dijalankan: ".mysqli_errno($koneksi)." - ".mysqli_error($koneksi));
+            }else{
+                echo "<script>alert('Data berhasil ditambah.');window.location='index.php';</script>";
+            }
         }else{
-            ?>
-            <script language="javascript">
-                alert('Berhasil Disimpan');
-                document.location.href = "index.php";
-            </script>
-            <?php
+            echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='index.php';</script>";
+        }
+    }else{
+        $query = "UPDATE m_siswa SET angkatan = '$angkatan', nama='$nama', nim='$nim', jurusan='$jurusan' WHERE id='$id'";
+        $result = mysqli_query($koneksi, $query);
+        if(!$result){
+            die("Query gagal dijalankan: ".mysqli_errno($koneksi)." - ".mysqli_query($koneksi, $query));
+        }else{
+            echo "<script>alert('Data berhasil diubah. ');window.location='index.php';</script>";
         }
     }
 ?>

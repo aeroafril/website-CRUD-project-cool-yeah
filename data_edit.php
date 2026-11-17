@@ -48,6 +48,12 @@
                         <label>Jurusan</label>
                         <input class="form-control" name="jurusan" value="<?php echo $row['jurusan'];?>" required>
                     </div>
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <img src="img/<?php echo $row['photo']; ?>" style="width: 120px;">
+                        <input type="file" class="form-control" name="photo">
+                        <i style="float: left; font-size: 11px; color: red;">Abaikan jika tidak merubah gambar produk</i>
+                    </div>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Simpan</button>
                     <button type="reset" class="btn btn-default"><i class="fa fa-file-text"></i>Bersih</button>
                 </form>

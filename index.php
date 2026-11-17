@@ -29,6 +29,7 @@
                                 <th>Nama</th>
                                 <th>NIP</th>
                                 <th>Jurusan</th>
+                                <th>Photo</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@
                                         <td><?php echo $row['nama'];?></td>
                                         <td><?php echo $row['nim'];?></td>
                                         <td><?php echo $row['jurusan'];?></td>
+                                        <td style="text-align: center;"><img src="img/<?php echo $row['photo']; ?>" style="width: 120px;"></td>
                                         <td>
                                             <a href="data_edit.php?id=<?php echo $row['id'];?>" class="btn btn-info btn-sm">
                                                 <i class="glyphicon glyphicon-check"></i>
