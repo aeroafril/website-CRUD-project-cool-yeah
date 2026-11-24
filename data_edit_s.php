@@ -30,10 +30,10 @@
             if(!$result){
                 die("Query gagal dijalankan: ".mysqli_errno($koneksi)." - ".mysqli_error($koneksi));
             }else{
-                echo "<script>alert('Data berhasil ditambah.');window.location='index.php';</script>";
+                echo "<script>alert('Data berhasil ditambah.');window.location='index-Copy.php';</script>";
             }
         }else{
-            echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='index.php';</script>";
+            echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='index-Copy.php';</script>";
         }
     }else{
         $query = "UPDATE m_siswa SET angkatan = '$angkatan', nama='$nama', nim='$nim', jurusan='$jurusan' WHERE id='$id'";
@@ -41,7 +41,7 @@
         if(!$result){
             die("Query gagal dijalankan: ".mysqli_errno($koneksi)." - ".mysqli_query($koneksi, $query));
         }else{
-            echo "<script>alert('Data berhasil diubah. ');window.location='index.php';</script>";
+            echo "<script>alert('Data berhasil diubah. ');window.location='index-Copy.php';</script>";
         }
     }
 ?>

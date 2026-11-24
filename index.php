@@ -6,6 +6,8 @@
     <title>PROJECT SAYA</title>
     <link rel="stylesheet" href="css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style type="text/css"></style>
 </head>
 <body>
     <div class="col-md-8 col-md-offset-2">
@@ -13,77 +15,51 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="alert alert-warning">
-                    <a href="data_add.php" class="btn btn-danger">
+                    <a href="index-Copy.php" class="btn btn-danger">
                         <i class="glyphicon glyphicon-plus"></i>
-                        Tambah Data
+                        LOGIN
                     </a>
                 </div>
             </div>
             <div class="panel-body">
-                <div class="table">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Angkatan</th>
-                                <th>Nama</th>
-                                <th>NIP</th>
-                                <th>Jurusan</th>
-                                <th>Photo</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                include 'koneksi.php';
-                                $no = 0;
-                                $result = mysqli_query($koneksi, "SELECT * FROM m_siswa ORDER BY nama ASC");
-                                while($row = mysqli_fetch_assoc($result)){
-                                    $no++
-                                    ?>
-                                    <tr class="">
-                                        <td><?php echo $row['id'];?></td>
-                                        <td><?php echo $row['angkatan'];?></td>
-                                        <td><?php echo $row['nama'];?></td>
-                                        <td><?php echo $row['nim'];?></td>
-                                        <td><?php echo $row['jurusan'];?></td>
-                                        <td style="text-align: center;"><img src="img/<?php echo $row['photo']; ?>" style="width: 120px;"></td>
-                                        <td>
-                                            <a href="data_edit.php?id=<?php echo $row['id'];?>" class="btn btn-info btn-sm">
-                                                <i class="glyphicon glyphicon-check"></i>
-                                                Edit
-                                            </a>
-                                            <a href="javascript:;" data-id="<?php echo $row['id'] ?>" data-toggle="modal" data-target="#modal-konfirmasi" class="btn btn-warning btn-sm">
-                                                <i class="glyphicon glyphicon-trash"></i>
-                                                Hapus
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                        </tbody>
-                    </table>
+                <div class="container">
+                    <h2 align="center">Card Dinamis dari Database PHP</h2>
+                    <div class="row" id="load_data">
+                        <?php
+                            include 'koneksi.php';
+                            $query = "SELECT * FROM m_siswa ORDER BY id ASC";
+                            $dewan1 = $koneksi->prepare($query);
+                            $dewan1->execute();
+                            $res1 = $dewan1->get_result();
+                            while($row = $res1->fetch_assoc()){
+                                $id = $row["id"];
+                                $photo = $row["photo"];
+                                $nim = $row["nim"];
+                                $nama = $row["nama"];
+                                $jurusan = $row["jurusan"];
+                                $angkatan = $row["angkatan"];
+                        ?>
+                        <div class="card-deck">
+                            <div class="card" style="width: 250px;">
+                                <img src="img/<?php echo $row['photo']; ?>" class="card-img-top" alt="gambar">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $nama; ?></h5>
+                                    <p class="card-text"><?php echo $nim; ?></p>
+                                    <p class="card-text"><?php echo $jurusan; ?></p>
+                                    <a href="#" class="btn btn-primary">Selanjutnya</a>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Angkatan <?php echo $angkatan; ?></small>
+                                </div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div id="modal-konfirmasi" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="mosal-body btn-info">Apakah Anda yakin ingin menghapus data ini?</div>
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-danger" id="hapus-true-data">Hapus</a>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.dataTables.js"></script>
@@ -94,6 +70,6 @@
             $('#dataTables-example').dataTable();
         });
     </script>
-    
+
 </body>
 </html>

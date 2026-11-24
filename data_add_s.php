@@ -29,7 +29,7 @@
             if(!$result){
                 die("Query gagal dijalankan: ".mysqli_errno($koneksi)." - ".mysqli_error($koneksi));
             }else{
-                echo "<script>alert('Data berhasil ditambah.');window.location='index.php';</script>";
+                echo "<script>alert('Data berhasil ditambah.');window.location='index-Copy.php';</script>";
             }
         }else{
             echo "<script>alert('Ekstensi gambar yang boleh hanya jpg atau png.');window.location='data_add.php';</script>";
@@ -41,7 +41,7 @@
             ?>
             <script language="javascript">
                 alert('Berhasil Disimpan');
-                document.location.href = "index.php";
+                document.location.href = "index-Copy.php";
             </script>
             <?php
         }

@@ -5,7 +5,7 @@
     if($result){ ?>
         <script language="javascript">
             alert('Berhasil Dihapus');
-            document.location.href = "index.php";
+            document.location.href = "index-Copy.php";
         </script>
     <?php
     }else{

@@ -13,7 +13,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="alert alert-warning">
-                    <a href="index.php" class="btn btn-danger">
+                    <a href="index-Copy.php" class="btn btn-danger">
                         <i class="glyphicon glyphicon-file">
                             Lihat Data
                         </i>
